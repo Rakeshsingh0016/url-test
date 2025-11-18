@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p>Redirecting...</p>
+
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = { 
+      apiKey: "AIzaSyAU_1WReKhyGqdWBJGaaN97rjzsyHcXHdU",
+      authDomain: "url-short-450df.firebaseapp.com",
+      databaseURL: "https://url-short-450df-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "url-short-450df",
+      storageBucket: "url-short-450df.firebasestorage.app",
+      messagingSenderId: "861547833606",
+      appId: "1:861547833606:web:ff4f86c044c0b7e4e01687"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    let db = firebase.database();
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("c");
+
+    if (!code) {
+      document.body.innerHTML = "<h3>Invalid short URL</h3>";
+    } else {
+      db.ref("urls/" + code).once("value").then(snapshot => {
+        if (snapshot.exists()) {
+          let longUrl = snapshot.val().longUrl;
+          window.location.href = longUrl;
+        } else {
+          document.body.innerHTML = "<h3>URL Not Found</h3>";
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
 
