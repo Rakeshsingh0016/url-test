@@ -1,1 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
+</head>
+
+<body>
+  <h2>Simple URL Shortener</h2>
+
+  <input type="text" id="longUrl" placeholder="Enter long URL" style="width:300px;">
+  <br><br>
+
+  <input type="text" id="alias" placeholder="Custom Alias (optional)">
+  <br><br>
+
+  <button onclick="createShortURL()">Create Short URL</button>
+
+  <p id="result"></p>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database-compat.js"></script>
+
+  <!-- Main script -->
+  <script src="script.js"></script>
+</body>
+</html>
 
