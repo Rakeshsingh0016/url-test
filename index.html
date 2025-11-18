@@ -1,45 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Redirecting...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>URL Shortener</title>
 </head>
+
 <body>
+  <h2>Simple URL Shortener</h2>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-  import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-database.js";
+  <input type="text" id="longUrl" placeholder="Enter long URL" style="width:300px;">
+  <br><br>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAU_1WReKhyGqdWBJGaaN97rjzsyHcXHdU",
-    authDomain: "url-short-450df.firebaseapp.com",
-    databaseURL: "https://url-short-450df-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "url-short-450df",
-    storageBucket: "url-short-450df.firebasestorage.app",
-    messagingSenderId: "861547833606",
-    appId: "1:861547833606:web:ff4f86c044c0b7e4e01687"
-  };
+  <input type="text" id="alias" placeholder="Custom Alias (optional)">
+  <br><br>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  <button onclick="createShortURL()">Create Short URL</button>
 
-  // get alias from URL path
-  const alias = window.location.pathname.replace("/", "");  
-  if (!alias || alias.length < 1) {
-    document.body.innerHTML = "<h2>Invalid URL</h2>";
-  } else {
-    const urlRef = ref(db, "urls/" + alias);
-    get(urlRef).then(snap => {
-      if (snap.exists()) {
-        const longUrl = snap.val().longUrl;
-        window.location.href = longUrl; // fastest redirect
-      } else {
-        document.body.innerHTML = "<h2>404: Link not found</h2>";
-      }
-    });
-  }
+  <p id="result"></p>
 
-</script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.11.1/firebase-database-compat.js"></script>
 
+  <!-- Main script -->
+  <script src="script.js"></script>
 </body>
 </html>
