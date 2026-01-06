@@ -5,7 +5,9 @@ function genCode() {
   return Math.random().toString(36).substring(2, 8);
 }
 
-document.getElementById("btn").addEventListener("click", async () => {
+const btn = document.getElementById("btn");
+
+btn.addEventListener("click", async () => {
   const longUrl = document.getElementById("url").value;
   if (!longUrl) return alert("URL required");
 
